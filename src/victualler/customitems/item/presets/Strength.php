@@ -2,7 +2,12 @@
 
 namespace victualler\customitems\item\presets;
 
+use pocketmine\entity\effect\EffectInstance;
+use pocketmine\entity\effect\VanillaEffects;
 use pocketmine\item\ItemIdentifier;
+use pocketmine\item\ItemUseResult;
+use pocketmine\math\Vector3;
+use pocketmine\player\Player;
 use victualler\customitems\item\Abilities;
 use victualler\customitems\Loader;
 
@@ -13,18 +18,16 @@ class Strength extends Abilities {
         parent::__construct($identifier, $name);
     }
 
-    public function getDisplayName(): string
+    public function onClickAir(Player $player, Vector3 $directionVector, array &$returnedItems): ItemUseResult
     {
-        return Loader::getInstance()->getConfig()->get("{$this->getName()}")['custom-name'];
+        self::addEffects($player);
+        return ItemUseResult::SUCCESS();
     }
 
-    public function getDisplayLore(): string
-    {
-        return Loader::getInstance()->getConfig()->get("{$this->getName()}")['custom-lore'];
-    }
-
-    public function getCooldown(): int
-    {
-        return Loader::getInstance()->getConfig()->get("{$this->getName()}")['cooldown'];
+    /**
+     * @return EffectInstance[]
+     */
+    public function getEffects(): array {
+        return [new EffectInstance(VanillaEffects::STRENGTH(), 20*$this->getAmplifier(), $this->getAmplifier())];
     }
 }
