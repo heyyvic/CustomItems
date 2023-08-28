@@ -1,0 +1,5 @@
+  name: CustomItems
+  main: victualler\customitems\Loader
+  version: 0.0.1-BETA
+  author: Victualler
+  api: [5.0.0]
