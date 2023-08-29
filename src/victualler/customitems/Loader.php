@@ -5,6 +5,7 @@ namespace victualler\customitems;
 use pocketmine\plugin\PluginBase;
 use pocketmine\utils\Config;
 use pocketmine\utils\SingletonTrait;
+use victualler\customitems\commands\abilities\AbilitiesCommand;
 use victualler\customitems\item\ItemLoader;
 use victualler\customitems\provider\Provider;
 use victualler\customitems\session\SessionFactory;
@@ -25,7 +26,7 @@ class Loader extends PluginBase {
     {
         $this->sessionFactory = new SessionFactory();
         $this->provider = new Provider();
-
+        Loader::getInstance()->getServer()->getCommandMap()->register("CustomItems", new AbilitiesCommand());
         ItemLoader::init();
     }
 
