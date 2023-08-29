@@ -5,6 +5,7 @@ namespace victualler\customitems\item\presets;
 use pocketmine\entity\effect\EffectInstance;
 use pocketmine\entity\effect\VanillaEffects;
 use pocketmine\item\ItemIdentifier;
+use pocketmine\item\ItemTypeIds;
 use pocketmine\item\ItemUseResult;
 use pocketmine\math\Vector3;
 use pocketmine\player\Player;
@@ -14,9 +15,9 @@ use victualler\customitems\session\SessionFactory;
 
 class Strength extends Abilities {
 
-    public function __construct(ItemIdentifier $identifier, string $name)
+    public function __construct()
     {
-        parent::__construct($identifier, $name);
+        parent::__construct(new ItemIdentifier(ItemTypeIds::BLAZE_POWDER), "strength");
     }
 
     public function onClickAir(Player $player, Vector3 $directionVector, array &$returnedItems): ItemUseResult
