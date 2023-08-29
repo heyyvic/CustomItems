@@ -5,13 +5,14 @@ namespace victualler\customitems\item;
 use pocketmine\item\Item;
 use pocketmine\item\ItemIdentifier;
 use pocketmine\player\Player;
-use pocketmine\utils\Config;
 use pocketmine\utils\SingletonTrait;
 use victualler\customitems\Loader;
+use victualler\customitems\item\trait\MessageTrait;
 
 abstract class Abilities extends Item {
 
     use SingletonTrait;
+    use MessageTrait;
 
     /**
      * @param ItemIdentifier $identifier
@@ -48,11 +49,6 @@ abstract class Abilities extends Item {
 
     public function getCooldown(): int {
         return Loader::getInstance()->getConfig()->get("{$this->getName()}")['cooldown'];
-    }
-
-    public function getMessage(String $string): String {
-        $config = new Config("messages.yml", Config::YAML);
-        return $config->get(str_replace(['{displayName}', '{displayLore}', '{cooldown}', '{amplifier}', '{duration}'], [$this->getDisplayName(), $this->getDisplayLore(), $this->getCooldown(), $this->getAmplifier(), $this->getDuration()], $string));
     }
 
 }

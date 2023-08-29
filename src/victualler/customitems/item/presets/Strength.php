@@ -10,6 +10,7 @@ use pocketmine\math\Vector3;
 use pocketmine\player\Player;
 use victualler\customitems\item\Abilities;
 use victualler\customitems\Loader;
+use victualler\customitems\session\SessionFactory;
 
 class Strength extends Abilities {
 
@@ -20,7 +21,16 @@ class Strength extends Abilities {
 
     public function onClickAir(Player $player, Vector3 $directionVector, array &$returnedItems): ItemUseResult
     {
-        $player->sendMessage($this->getMessage("strength-message-use"));
+        $session = SessionFactory::getInstance()->getSession($player->getXuid());
+        if(($cooldown = $session->getCooldown("partner.cooldown")) !== null) {
+            $this->getMessageForCooldown("global-message-hasCooldown", $cooldown);
+            return ItemUseResult::FAIL();
+        }
+        if(($cooldown = $session->getCooldown("strength.cooldown")) !== null) {
+            $this->getMessageForCooldown("pitem-message-hasCooldown", $cooldown);
+            return ItemUseResult::FAIL();
+        }
+        $player->sendMessage($this->getMessageForItem("strength-message-use"));
         self::addEffects($this->getEffects(), $player);
         return ItemUseResult::SUCCESS();
     }

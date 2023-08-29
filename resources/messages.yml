@@ -1,5 +1,17 @@
 # PLUGIN MADE BY VictuallerDev/SyuVic
+
+# FOR ITEMS-uses:
+
 # {displayName} => Custom Name, {displayLore} => Custom Lore, {cooldown} => Cooldown of the Item,
 # {amplifier} => Amplifier, {duration} => Duration.
 
+
 strength-message-use: "&eYou just used {displayName}&r&e for &f{duration}'s&e."
+
+# FOR COOLDOWNS:
+
+# {format} => Format of the Cooldown, {time} => Time.
+
+global-message-hasCooldown: "&cYou can't use this because you have {format}&r&c cooldown. This ends in &7{time}&r&c."
+
+pitem-message-hasCooldown: "&cYou can't use this because you have {format}&r&c cooldown. This ends in &7{time}&r&c."
