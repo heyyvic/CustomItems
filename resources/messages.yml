@@ -1,0 +1,5 @@
+# PLUGIN MADE BY VictuallerDev/SyuVic
+# {displayName} => Custom Name, {displayLore} => Custom Lore, {cooldown} => Cooldown of the Item,
+# {amplifier} => Amplifier, {duration} => Duration.
+
+strength-message-use: "&eYou just used {displayName}&r&e for &f{duration}'s&e."

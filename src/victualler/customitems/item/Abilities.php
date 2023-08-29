@@ -5,9 +5,13 @@ namespace victualler\customitems\item;
 use pocketmine\item\Item;
 use pocketmine\item\ItemIdentifier;
 use pocketmine\player\Player;
+use pocketmine\utils\Config;
+use pocketmine\utils\SingletonTrait;
 use victualler\customitems\Loader;
 
 abstract class Abilities extends Item {
+
+    use SingletonTrait;
 
     /**
      * @param ItemIdentifier $identifier
@@ -18,16 +22,16 @@ abstract class Abilities extends Item {
         parent::__construct($identifier, $name);
     }
 
-    public function addEffects(Player $entity): void{
-        foreach (self::getEffects() as $effect) {
+    public function addEffects(array $effects, Player $entity): void{
+        foreach ($effects as $effect) {
             $entity->getEffects()->add($effect);
         }
     }
-    abstract static function getEffects(): array ;
+    abstract function getEffects(): array ;
 
     public function getDuration(): int
     {
-        return Loader::getInstance()->getConfig()->get("{$this->getName()}")['amplifier'];
+        return Loader::getInstance()->getConfig()->get("{$this->getName()}")['duration'];
     }
 
     public function getAmplifier(): int {
@@ -44,6 +48,11 @@ abstract class Abilities extends Item {
 
     public function getCooldown(): int {
         return Loader::getInstance()->getConfig()->get("{$this->getName()}")['cooldown'];
+    }
+
+    public function getMessage(String $string): String {
+        $config = new Config("messages.yml", Config::YAML);
+        return $config->get(str_replace(['{displayName}', '{displayLore}', '{cooldown}', '{amplifier}', '{duration}'], [$this->getDisplayName(), $this->getDisplayLore(), $this->getCooldown(), $this->getAmplifier(), $this->getDuration()], $string));
     }
 
 }

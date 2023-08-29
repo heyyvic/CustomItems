@@ -3,6 +3,7 @@
 namespace victualler\customitems;
 
 use pocketmine\plugin\PluginBase;
+use pocketmine\utils\Config;
 use pocketmine\utils\SingletonTrait;
 
 class Loader extends PluginBase {

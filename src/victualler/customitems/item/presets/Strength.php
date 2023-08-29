@@ -20,7 +20,8 @@ class Strength extends Abilities {
 
     public function onClickAir(Player $player, Vector3 $directionVector, array &$returnedItems): ItemUseResult
     {
-        self::addEffects($player);
+        $player->sendMessage($this->getMessage("strength-message-use"));
+        self::addEffects($this->getEffects(), $player);
         return ItemUseResult::SUCCESS();
     }
 
@@ -28,6 +29,6 @@ class Strength extends Abilities {
      * @return EffectInstance[]
      */
     public function getEffects(): array {
-        return [new EffectInstance(VanillaEffects::STRENGTH(), 20*$this->getAmplifier(), $this->getAmplifier())];
+        return [new EffectInstance(VanillaEffects::STRENGTH(), 20*$this->getDuration(), $this->getAmplifier())];
     }
 }
