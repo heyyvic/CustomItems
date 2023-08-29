@@ -26,6 +26,7 @@ class Loader extends PluginBase {
     {
         $this->sessionFactory = new SessionFactory();
         $this->provider = new Provider();
+        Loader::getInstance()->getServer()->getPluginManager()->registerEvents(new EventHandler(), $this);
         Loader::getInstance()->getServer()->getCommandMap()->register("CustomItems", new AbilitiesCommand());
         ItemLoader::init();
     }
