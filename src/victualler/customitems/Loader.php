@@ -22,21 +22,22 @@ class Loader extends PluginBase {
         self::setInstance($this);
     }
 
-    protected function onEnable(): void
-    {
-        $this->sessionFactory = new SessionFactory();
+    protected function onEnable(): void {
         $this->provider = new Provider();
+        
+        $this->sessionFactory = new SessionFactory();
+        
         Loader::getInstance()->getServer()->getPluginManager()->registerEvents(new EventHandler(), $this);
         Loader::getInstance()->getServer()->getCommandMap()->register("CustomItems", new AbilitiesCommand());
+        
         ItemLoader::init();
+    }
+
+    public function getProvider(): Provider {
+        return $this->provider;
     }
 
     public function getSessionFactory(): SessionFactory {
         return $this->sessionFactory;
-    }
-
-    public function getProvider(): Provider
-    {
-        return $this->provider;
     }
 }
