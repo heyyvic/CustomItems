@@ -31,6 +31,8 @@ class Strength extends Abilities {
             $this->getMessageForCooldown("pitem-message-hasCooldown", $cooldown);
             return ItemUseResult::FAIL();
         }
+        $session->addCooldown("strength.cooldown", "&r&c&lStrength II", $this->getCooldown());
+        $session->addCooldown("partner.cooldown", "&r&5&lPartner Item's", 16);
         $player->sendMessage($this->getMessageForItem("strength-message-use"));
         self::addEffects($this->getEffects(), $player);
         return ItemUseResult::SUCCESS();
