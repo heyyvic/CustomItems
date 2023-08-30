@@ -18,20 +18,19 @@ abstract class Abilities extends Item {
      * @param ItemIdentifier $identifier
      * @param string $name
      */
-    public function __construct(ItemIdentifier $identifier, string $name)
-    {
+    public function __construct(ItemIdentifier $identifier, string $name) {
         parent::__construct($identifier, $name);
     }
 
-    public function addEffects(array $effects, Player $entity): void{
+    public function addEffects(array $effects, Player $entity): void {
         foreach ($effects as $effect) {
             $entity->getEffects()->add($effect);
         }
     }
-    abstract function getEffects(): array ;
+    
+    abstract function getEffects(): array;
 
-    public function getDuration(): int
-    {
+    public function getDuration(): int {
         return Loader::getInstance()->getConfig()->get("{$this->getName()}")['duration'];
     }
 
@@ -50,5 +49,4 @@ abstract class Abilities extends Item {
     public function getCooldown(): int {
         return Loader::getInstance()->getConfig()->get("{$this->getName()}")['cooldown'];
     }
-
 }
