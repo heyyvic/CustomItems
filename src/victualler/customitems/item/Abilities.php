@@ -37,11 +37,11 @@ abstract class Abilities extends Item {
     abstract function getEffects(): array;
 
     public function getDuration(): int {
-        return Loader::getInstance()->getConfig()->get("{$this->getName()}")['duration'];
+        return intval(Loader::getInstance()->getConfig()->get("{$this->getName()}")['duration']);
     }
 
     public function getAmplifier(): int {
-        return Loader::getInstance()->getConfig()->get("{$this->getName()}")['amplifier'];
+        return intval(Loader::getInstance()->getConfig()->get("{$this->getName()}")['amplifier']);
     }
 
     public function getDisplayName(): string {
@@ -53,6 +53,6 @@ abstract class Abilities extends Item {
     }
 
     public function getCooldown(): int {
-        return Loader::getInstance()->getConfig()->get("{$this->getName()}")['cooldown'];
+        return intval(Loader::getInstance()->getConfig()->get("{$this->getName()}")['cooldown']);
     }
 }
