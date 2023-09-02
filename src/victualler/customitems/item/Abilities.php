@@ -23,9 +23,6 @@ abstract class Abilities extends Item {
      */
     public function __construct(ItemIdentifier $identifier, string $name) {
         parent::__construct($identifier, $name);
-        $this->setCustomName(TextFormat::colorize("&r".$this->getDisplayName()));
-        $this->setLore([$this->getDisplayLore()]);
-        $this->addEnchantment(new EnchantmentInstance(VanillaEnchantments::PROTECTION(), 1));
     }
 
     public function addEffects(array $effects, Player $entity): void {
@@ -36,23 +33,35 @@ abstract class Abilities extends Item {
     
     abstract function getEffects(): array;
 
-    public function getDuration(): int {
-        return intval(Loader::getInstance()->getConfig()->get("{$this->getName()}")['duration']);
+    public function getDuration(String $name): int {
+        return intval(Loader::getInstance()->getConfig()->get($name)['duration']);
     }
 
-    public function getAmplifier(): int {
-        return intval(Loader::getInstance()->getConfig()->get("{$this->getName()}")['amplifier']);
+    public function getAmplifier(String $name): int {
+        return intval(Loader::getInstance()->getConfig()->get($name)['amplifier']);
     }
 
-    public function getDisplayName(): string {
-        return TextFormat::colorize("&r".Loader::getInstance()->getConfig()->get("{$this->getName()}")['custom-name']);
+    public function getDisplayName(String $name): string {
+        return TextFormat::colorize("&r".Loader::getInstance()->getConfig()->get($name)['custom-name']);
     }
 
-    public function getDisplayLore(): string {
-        return TextFormat::colorize(str_replace(['{cooldown}', '{duration}'], [$this->getCooldown(), $this->getDuration()], "&r".Loader::getInstance()->getConfig()->get("{$this->getName()}")['custom-lore']));
+    public function getDisplayLore(String $name): string {
+        return TextFormat::colorize(str_replace(['{cooldown}', '{duration}'], [$this->getCooldown($name), $this->getDuration($name)], "&r".Loader::getInstance()->getConfig()->get($name)['custom-lore']));
     }
 
-    public function getCooldown(): int {
-        return intval(Loader::getInstance()->getConfig()->get("{$this->getName()}")['cooldown']);
+    public function getCooldown(String $name): int {
+        return intval(Loader::getInstance()->getConfig()->get($name)['cooldown']);
+    }
+
+    public function getFormat(String $name): int {
+        return Loader::getInstance()->getConfig()->get($name)['format'];
+    }
+
+    public function getCooldownGlobal(): int {
+        return intval(Loader::getInstance()->getConfig()->get("global")['cooldown-global-ability']);
+    }
+
+    public function getFormatGlobal(): string {
+        return Loader::getInstance()->getConfig()->get("global")['format-global-ability'];
     }
 }

@@ -4,6 +4,8 @@ namespace victualler\customitems\commands\abilities;
 
 use pocketmine\command\Command;
 use pocketmine\command\CommandSender;
+use pocketmine\item\enchantment\EnchantmentInstance;
+use pocketmine\item\enchantment\VanillaEnchantments;
 use pocketmine\player\Player;
 use pocketmine\utils\TextFormat;
 use victualler\customitems\item\Abilities;
@@ -22,10 +24,14 @@ class AbilitiesCommand extends Command {
             $sender->sendMessage(TextFormat::colorize("&cYou do not have permissions to use this command."));
             return;
         }
-        if($sender->getInventory()->canAddItem(new Strength())) {
-            $sender->getInventory()->addItem(new Strength());
+        $item = new Strength();
+        $item->setCustomName($item->getDisplayName($item->getName()));
+        $item->setLore([$item->getDisplayLore($item->getName())]);
+        $item->addEnchantment(new EnchantmentInstance(VanillaEnchantments::PROTECTION(), 1));
+        if($sender->getInventory()->canAddItem($item)) {
+            $sender->getInventory()->addItem($item);
         } else {
-            $sender->dropItem(new Strength());
+            $sender->dropItem($item);
         }
     }
 

@@ -6,5 +6,20 @@ strength:
   custom-name: "&c&lStrength II"
   custom-lore: "&r\n&7Use this for &c&lStrength II&r&7.\n\n&eCooldown&7:&c {cooldown} seconds\n&eDuration&7:&c {cooldown} seconds"
   cooldown: "60"
+  format: "&r&c&lStrength II"
   amplifier: "1"
   duration: "10"
+
+Unknown:
+  custom-name: "&c&lStrength II"
+  custom-lore: "&r\n&7Use this for &c&lStrength II&r&7.\n\n&eCooldown&7:&c {cooldown} seconds\n&eDuration&7:&c {cooldown} seconds"
+  cooldown: "60"
+  format: "&r&c&lStrength II"
+  amplifier: "1"
+  duration: "10"
+
+# GLOBAL
+
+global:
+  cooldown-global-ability: 16
+  format-global-ability: "&r&5&lPartner Item's"
