@@ -23,11 +23,11 @@ class Strength extends Abilities {
     public function onClickAir(Player $player, Vector3 $directionVector, array &$returnedItems): ItemUseResult
     {
         $session = SessionFactory::getInstance()->getSession($player->getXuid());
-        if($session->getCooldown("partner.cooldown") !== null) {
+        if($session !== null && $session->getCooldown("partner.cooldown") !== null) {
             $this->getMessageForCooldown("global-message-hasCooldown", $session->getCooldown("partner.cooldown"));
             return ItemUseResult::FAIL();
         }
-        if($session->getCooldown("strength.cooldown") !== null) {
+        if($session !== null && $session->getCooldown("strength.cooldown") !== null) {
             $this->getMessageForCooldown("pitem-message-hasCooldown", $session->getCooldown("strength.cooldown"));
             return ItemUseResult::FAIL();
         }

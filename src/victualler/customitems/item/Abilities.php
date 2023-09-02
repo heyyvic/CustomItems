@@ -53,7 +53,7 @@ abstract class Abilities extends Item {
         return intval(Loader::getInstance()->getConfig()->get($name)['cooldown']);
     }
 
-    public function getFormat(String $name): int {
+    public function getFormat(String $name): string {
         return Loader::getInstance()->getConfig()->get($name)['format'];
     }
 
