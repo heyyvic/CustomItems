@@ -8,11 +8,13 @@ use victualler\customitems\Loader;
 
 class Provider {
 
-    public function __construct()
-    {
+    public function __construct() {
         $plugin = Loader::getInstance();
 
-        if (!is_dir($plugin->getDataFolder() . 'database' . DIRECTORY_SEPARATOR . 'players')) @mkdir($plugin->getDataFolder() . 'database' . DIRECTORY_SEPARATOR . 'players');
+        if (!is_dir($plugin->getDataFolder() . 'database' . DIRECTORY_SEPARATOR . 'players'))
+            @mkdir($plugin->getDataFolder() . 'database' . DIRECTORY_SEPARATOR . 'players');
+
+        $plugin->saveDefaultConfig();
     }
 
     /**
@@ -25,8 +27,7 @@ class Provider {
     /**
      * @return array
      */
-    public function getPlayers(): array
-    {
+    public function getPlayers(): array {
         $players = [];
 
         foreach (glob(Loader::getInstance()->getDataFolder() . 'database' . DIRECTORY_SEPARATOR . 'players' . DIRECTORY_SEPARATOR . '*.json') as $file)
@@ -37,8 +38,7 @@ class Provider {
     /**
      * @throws JsonException
      */
-    public function savePlayers(): void
-    {
+    public function savePlayers(): void {
         foreach (Loader::getInstance()->getSessionFactory()->getSessions() as $xuid => $session) {
             $config = new Config(Loader::getInstance()->getDataFolder() . 'database' . DIRECTORY_SEPARATOR . 'players' . DIRECTORY_SEPARATOR  . $xuid . '.json', Config::JSON);
             $config->setAll($session->getData());
