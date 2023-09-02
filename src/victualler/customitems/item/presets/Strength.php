@@ -32,7 +32,7 @@ class Strength extends Abilities {
             return ItemUseResult::FAIL();
         }
         $session->addCooldown("partner.cooldown", $this->getFormatGlobal(), $this->getCooldownGlobal());
-        $session->addCooldown("strength.cooldown", $this->getFormat(), $this->getCooldown());
+        $session->addCooldown("strength.cooldown", $this->getFormat($this->getVanillaName()), $this->getCooldown($this->getVanillaName()));
         $player->sendMessage($this->getMessageForItem("strength-message-use"));
         self::addEffects($this->getEffects(), $player);
         return ItemUseResult::SUCCESS();
@@ -42,6 +42,6 @@ class Strength extends Abilities {
      * @return EffectInstance[]
      */
     public function getEffects(): array {
-        return [new EffectInstance(VanillaEffects::STRENGTH(), 20*$this->getDuration(), $this->getAmplifier())];
+        return [new EffectInstance(VanillaEffects::STRENGTH(), 20*$this->getDuration($this->getVanillaName()), $this->getAmplifier($this->getVanillaName()))];
     }
 }

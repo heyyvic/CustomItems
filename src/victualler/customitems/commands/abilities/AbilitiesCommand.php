@@ -25,8 +25,8 @@ class AbilitiesCommand extends Command {
             return;
         }
         $item = new Strength();
-        $item->setCustomName($item->getDisplayName($item->getName()));
-        $item->setLore([$item->getDisplayLore($item->getName())]);
+        $item->setCustomName($item->getDisplayName($item->getVanillaName()));
+        $item->setLore([$item->getDisplayLore($item->getVanillaName())]);
         $item->addEnchantment(new EnchantmentInstance(VanillaEnchantments::PROTECTION(), 1));
         if($sender->getInventory()->canAddItem($item)) {
             $sender->getInventory()->addItem($item);
