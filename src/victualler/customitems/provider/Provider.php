@@ -11,6 +11,8 @@ class Provider {
     public function __construct() {
         $plugin = Loader::getInstance();
 
+        if (!is_dir($plugin->getDataFolder() . 'database'))
+            @mkdir($plugin->getDataFolder() . 'database');
         if (!is_dir($plugin->getDataFolder() . 'database' . DIRECTORY_SEPARATOR . 'players'))
             @mkdir($plugin->getDataFolder() . 'database' . DIRECTORY_SEPARATOR . 'players');
 
@@ -20,8 +22,7 @@ class Provider {
     /**
      * @throws JsonException
      */
-    public function save(): void
-    {
+    public function save(): void {
         $this->savePlayers();
     }
     /**

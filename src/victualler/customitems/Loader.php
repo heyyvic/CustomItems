@@ -30,7 +30,7 @@ class Loader extends PluginBase {
         $this->sessionFactory = new SessionFactory();
         
         $this->getServer()->getPluginManager()->registerEvents(new EventHandler(), $this);
-        
+
         $this->getServer()->getCommandMap()->register("CustomItems", new AbilitiesCommand());
         ItemLoader::init();
 
