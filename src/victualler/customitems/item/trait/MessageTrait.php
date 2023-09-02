@@ -7,9 +7,9 @@ use victualler\customitems\session\cooldown\Cooldown;
 
 trait MessageTrait {
 
-    public function getMessageForItem(String $string): String {
+    public function getMessageForItem(String $string, String $name): String {
         $config = new Config("messages.yml", Config::YAML);
-        return $config->get(str_replace(['{displayName}', '{displayLore}', '{cooldown}', '{amplifier}', '{duration}'], [$this->getDisplayName(), $this->getDisplayLore(), $this->getCooldown(), $this->getAmplifier(), $this->getDuration()], $string));
+        return $config->get(str_replace(['{displayName}', '{displayLore}', '{cooldown}', '{amplifier}', '{duration}'], [$this->getDisplayName($name), $this->getDisplayLore($name), $this->getCooldown($name), $this->getAmplifier($name), $this->getDuration($name)], $string));
     }
 
     public function getMessageForCooldown(String $string, Cooldown $cooldown): String {

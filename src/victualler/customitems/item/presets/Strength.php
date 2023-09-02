@@ -33,7 +33,7 @@ class Strength extends Abilities {
         }
         $session->addCooldown("partner.cooldown", $this->getFormatGlobal(), $this->getCooldownGlobal());
         $session->addCooldown("strength.cooldown", $this->getFormat($this->getVanillaName()), $this->getCooldown($this->getVanillaName()));
-        $player->sendMessage($this->getMessageForItem("strength-message-use"));
+        $player->sendMessage($this->getMessageForItem("strength-message-use", $this->getVanillaName()));
         self::addEffects($this->getEffects(), $player);
         return ItemUseResult::SUCCESS();
     }
