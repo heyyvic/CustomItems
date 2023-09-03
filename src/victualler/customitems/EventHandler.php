@@ -3,14 +3,15 @@
 namespace victualler\customitems;
 
 use pocketmine\event\Listener;
+use pocketmine\event\player\PlayerJoinEvent;
 use pocketmine\event\player\PlayerLoginEvent;
 
 class EventHandler implements Listener {
 
     /**
-     * @param PlayerLoginEvent $event
+     * @param PlayerJoinEvent $event
      */
-    public function handleLogin(PlayerLoginEvent $event): void {
+    public function handleLogin(PlayerJoinEvent $event): void {
         $player = $event->getPlayer();
         $session = Loader::getInstance()->getSessionFactory()->getSession($player->getXuid());
 

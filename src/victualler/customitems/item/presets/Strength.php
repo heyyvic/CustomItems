@@ -23,18 +23,22 @@ class Strength extends Abilities {
     public function onClickAir(Player $player, Vector3 $directionVector, array &$returnedItems): ItemUseResult
     {
         $session = SessionFactory::getInstance()->getSession($player->getXuid());
-        if($session !== null && $session->getCooldown("partner.cooldown") !== null) {
-            $this->getMessageForCooldown("global-message-hasCooldown", $session->getCooldown("partner.cooldown"));
+        if($session === null) {
             return ItemUseResult::FAIL();
         }
-        if($session !== null && $session->getCooldown("strength.cooldown") !== null) {
-            $this->getMessageForCooldown("pitem-message-hasCooldown", $session->getCooldown("strength.cooldown"));
+        if($session->getCooldown("partner.cooldown") !== null) {
+            $player->sendMessage($this->getMessageForCooldown("global-message-hasCooldown", $session->getCooldown("partner.cooldown")));
             return ItemUseResult::FAIL();
         }
-        $session->addCooldown("partner.cooldown", $this->getFormatGlobal(), $this->getCooldownGlobal());
+        if($session->getCooldown("strength.cooldown") !== null) {
+            $player->sendMessage($this->getMessageForCooldown("pitem-message-hasCooldown", $session->getCooldown("strength.cooldown")));
+            return ItemUseResult::FAIL();
+        }
+        $session->addCooldown("partner.cooldown", "lol", 500);
         $session->addCooldown("strength.cooldown", $this->getFormat($this->getVanillaName()), $this->getCooldown($this->getVanillaName()));
         $player->sendMessage($this->getMessageForItem("strength-message-use", $this->getVanillaName()));
         self::addEffects($this->getEffects(), $player);
+        $this->pop();
         return ItemUseResult::SUCCESS();
     }
 

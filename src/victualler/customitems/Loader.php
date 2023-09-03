@@ -35,6 +35,11 @@ class Loader extends PluginBase {
         ItemLoader::init();
 
         $this->getScheduler()->scheduleRepeatingTask(new ClosureTask(function (): void {
+            $this->getProvider()->save();
+
+        }), 300 * 20);
+
+        $this->getScheduler()->scheduleRepeatingTask(new ClosureTask(function (): void {
             foreach ($this->getSessionFactory()->getSessions() as $session) $session->onUpdate();
         }), 20);
     }
@@ -43,7 +48,7 @@ class Loader extends PluginBase {
      * @throws JsonException
      */
     protected function onDisable(): void {
-        if (isset($this->provider)) $this->provider->save();
+        $this->getProvider()->save();
     }
 
     public function getProvider(): Provider {

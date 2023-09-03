@@ -31,8 +31,8 @@ class Provider {
     public function getPlayers(): array {
         $players = [];
 
-        foreach (glob(Loader::getInstance()->getDataFolder() . 'database' . DIRECTORY_SEPARATOR . 'players' . DIRECTORY_SEPARATOR . '*.json') as $file)
-            $players[basename($file, '.json')] = (new Config(Loader::getInstance()->getDataFolder() . 'database' . DIRECTORY_SEPARATOR . 'players' . DIRECTORY_SEPARATOR . basename($file), Config::JSON))->getAll();
+        foreach (glob(Loader::getInstance()->getDataFolder() . 'database' . DIRECTORY_SEPARATOR . 'players' . DIRECTORY_SEPARATOR . '*.yml') as $file)
+            $players[basename($file, '.yml')] = (new Config(Loader::getInstance()->getDataFolder() . 'database' . DIRECTORY_SEPARATOR . 'players' . DIRECTORY_SEPARATOR . basename($file), Config::YAML))->getAll();
         return $players;
     }
 
@@ -41,7 +41,7 @@ class Provider {
      */
     public function savePlayers(): void {
         foreach (Loader::getInstance()->getSessionFactory()->getSessions() as $xuid => $session) {
-            $config = new Config(Loader::getInstance()->getDataFolder() . 'database' . DIRECTORY_SEPARATOR . 'players' . DIRECTORY_SEPARATOR  . $xuid . '.json', Config::JSON);
+            $config = new Config(Loader::getInstance()->getDataFolder() . 'database' . DIRECTORY_SEPARATOR . 'players' . DIRECTORY_SEPARATOR  . $xuid . '.yml', Config::YAML);
             $config->setAll($session->getData());
             $config->save();
         }

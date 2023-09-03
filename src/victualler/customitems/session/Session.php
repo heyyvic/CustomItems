@@ -49,11 +49,11 @@ class Session {
     }
 
     /**
-     * @param string $name
+     * @param string $key
      * @return Cooldown|null
      */
-    public function getCooldown(string $name): ?Cooldown {
-        return $this->cooldowns[$name] ?? null;
+    public function getCooldown(string $key): ?Cooldown {
+        return $this->cooldowns[$key] ?? null;
     }
 
     /**
@@ -73,19 +73,19 @@ class Session {
     }
 
     /**
-     * @param string $name
+     * @param string $key
      * @param string $format
      * @param int $time
      */
-    public function addCooldown(string $name, string $format, int $time): void {
-        $this->cooldowns[$name] = new Cooldown($format, $time);
+    public function addCooldown(string $key, string $format, int $time): void {
+        $this->cooldowns[$key] = new Cooldown($format, $time);
     }
 
     /**
-     * @param string $name
+     * @param string $key
      */
-    public function removeCooldown(string $name): void {
-        unset($this->cooldowns[$name]);
+    public function removeCooldown(string $key): void {
+        unset($this->cooldowns[$key]);
     }
 
     public function onUpdate(): void {
@@ -107,8 +107,8 @@ class Session {
             'cooldowns' => []
         ];
 
-        foreach ($this->getCooldowns() as $name => $cooldown)
-            $data['cooldowns'][$name] = [
+        foreach ($this->getCooldowns() as $key => $cooldown)
+            $data['cooldowns'][$key] = [
                 'format' => $cooldown->getFormat(),
                 'time' => $cooldown->getTime(),
             ];
