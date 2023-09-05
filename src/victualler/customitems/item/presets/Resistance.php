@@ -26,6 +26,7 @@ class Resistance extends Abilities {
         }
         if($this->hasCooldownItem($player, $this)) {
             $player->sendMessage(TextFormat::colorize($this->getMessageForCooldown($this->getVanillaName()."-message-hasCooldown", $this->getCooldownItem($player, $this), $this->getCustomName())));
+            return ItemUseResult::FAIL();
         }
         $player->sendMessage($this->getMessageForItem($this->getVanillaName()."-message-use", $this->getVanillaName()));
         self::addEffects($this->getEffects(), $player);

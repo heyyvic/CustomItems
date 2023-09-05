@@ -17,7 +17,7 @@ resistance:
   duration: 10
 
 potionrefill:
-  custom-name: "&c&lPotion Refill"
+  custom-name: "&b&lPotion Refill"
   custom-lore: "&r\n&7Use this to fill your potion\n&7inventory where you have empty slots.\n\n&eCooldown&7:&c {cooldown} seconds"
   cooldown: 120
   amplifier: null

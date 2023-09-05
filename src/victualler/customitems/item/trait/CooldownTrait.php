@@ -10,7 +10,7 @@ use victualler\customitems\utils\Time;
 trait CooldownTrait {
 
     public function addCooldownItem(Player $player, Abilities $ability) : void {
-        Cooldowns::getInstance()->add($player->getName(), $ability->getCooldown($player->getName()), $ability->getVanillaName());
+        Cooldowns::getInstance()->add($player->getName(), $ability->getCooldown($ability->getVanillaName()), $ability->getVanillaName());
     }
 
     public function addCooldownGlobalItem(Player $player, Abilities $ability) : void {

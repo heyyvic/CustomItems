@@ -18,6 +18,8 @@ class Loader extends PluginBase {
 
     protected function onEnable(): void {
         new Cooldowns();
+        $this->saveDefaultConfig();
+        $this->saveResource("messages.yml");
         $this->getServer()->getCommandMap()->register("CustomItems", new AbilitiesCommand());
         $this->registerItems();
     }

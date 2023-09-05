@@ -26,6 +26,7 @@ class Strength extends Abilities {
         }
         if($this->hasCooldownItem($player, $this)) {
             $player->sendMessage(TextFormat::colorize($this->getMessageForCooldown($this->getVanillaName()."-message-hasCooldown", $this->getCooldownItem($player, $this), $this->getCustomName())));
+            return ItemUseResult::FAIL();
         }
         $this->addCooldownGlobalItem($player, $this);
         $this->addCooldownItem($player, $this);
