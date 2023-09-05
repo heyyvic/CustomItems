@@ -9,6 +9,20 @@ strength:
   amplifier: 1
   duration: 10
 
+resistance:
+  custom-name: "&7&lResistance III"
+  custom-lore: "&r\n&7Use this for &7&lResistance III&r&7.\n\n&eCooldown&7:&c {cooldown} seconds\n&eDuration&7:&c {cooldown} seconds"
+  cooldown: 60
+  amplifier: 2
+  duration: 10
+
+potionrefill:
+  custom-name: "&c&lPotion Refill"
+  custom-lore: "&r\n&7Use this to fill your potion\n&7inventory where you have empty slots.\n\n&eCooldown&7:&c {cooldown} seconds"
+  cooldown: 120
+  amplifier: null
+  duration: null
+
 # GLOBAL
 
 global:

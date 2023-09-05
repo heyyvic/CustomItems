@@ -7,6 +7,8 @@
 
 
 strength-message-use: "&eYou just used {displayName}&r&e for &f{duration}'s&e."
+resistance-message-use: "&eYou just used {displayName}&r&e for &f{duration}'s&e."
+potionrefill-message-use: "&eYou just used {displayName}&r&e now empty slots in your inventory have been filled with health potions."
 
 # FOR COOLDOWNS:
 
