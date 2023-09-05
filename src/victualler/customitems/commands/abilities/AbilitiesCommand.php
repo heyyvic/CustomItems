@@ -2,6 +2,7 @@
 
 namespace victualler\customitems\commands\abilities;
 
+use victualler\customitems\item\Abilities;
 use victualler\customitems\item\presets\PotionRefill;
 use victualler\customitems\item\presets\Resistance;
 use victualler\customitems\item\presets\Strength;
@@ -30,6 +31,9 @@ class AbilitiesCommand extends Command {
                 $item->setCustomName($item->getDisplayName($item->getVanillaName()));
                 $item->setLore([$item->getDisplayLore($item->getVanillaName())]);
                 $item->addEnchantment(new EnchantmentInstance(VanillaEnchantments::PROTECTION(), 1));
+                if($item instanceof Abilities) {
+                    $item->getNamedTag()->setString($item::ntb, $item->getVanillaName());
+                }
                 if ($sender->getInventory()->canAddItem($item)) {
                     $sender->getInventory()->addItem($item);
                 } else {

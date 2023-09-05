@@ -17,6 +17,8 @@ abstract class Abilities extends Item {
     use MessageTrait;
     use CooldownTrait;
 
+    const ntb = "NBT_ABILITY";
+
     /**
      * @param ItemIdentifier $identifier
      * @param string $name

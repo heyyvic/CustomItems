@@ -20,6 +20,9 @@ class Resistance extends Abilities {
     }
 
     public function onClickAir(Player $player, Vector3 $directionVector, array &$returnedItems): ItemUseResult {
+        if($this->getNamedTag()->getString($this::ntb) === null) {
+            return ItemUseResult::FAIL();
+        }
         if($this->hasCooldownGlobalItem($player)) {
             $player->sendMessage(TextFormat::colorize($this->getMessageForCooldown("global-message-hasCooldown", $this->getCooldownGlobalItem($player), $this->getFormatGlobal())));
             return ItemUseResult::FAIL();
