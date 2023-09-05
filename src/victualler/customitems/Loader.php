@@ -2,6 +2,7 @@
 
 namespace victualler\customitems;
 
+use victualler\customitems\api\cooldowns\Cooldowns;
 use victualler\customitems\commands\abilities\AbilitiesCommand;
 use victualler\customitems\item\ItemLoader;
 use pocketmine\plugin\PluginBase;
@@ -16,6 +17,7 @@ class Loader extends PluginBase {
     }
 
     protected function onEnable(): void {
+        new Cooldowns();
         $this->getServer()->getCommandMap()->register("CustomItems", new AbilitiesCommand());
         $this->registerItems();
     }
