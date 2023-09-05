@@ -2,6 +2,8 @@
 
 namespace victualler\customitems\item\presets;
 
+use pocketmine\item\PotionType;
+use pocketmine\item\VanillaItems;
 use pocketmine\utils\TextFormat;
 use victualler\customitems\item\Abilities;
 use pocketmine\entity\effect\EffectInstance;
@@ -12,11 +14,11 @@ use pocketmine\item\ItemUseResult;
 use pocketmine\math\Vector3;
 use pocketmine\player\Player;
 
-class Strength extends Abilities {
+class PotionRefill extends Abilities {
 
     public function __construct()
     {
-        parent::__construct(new ItemIdentifier(ItemTypeIds::BLAZE_POWDER), "strength");
+        parent::__construct(new ItemIdentifier(ItemTypeIds::GLASS_BOTTLE), "potionrefill");
     }
 
     public function onClickAir(Player $player, Vector3 $directionVector, array &$returnedItems): ItemUseResult {
@@ -28,7 +30,11 @@ class Strength extends Abilities {
             $player->sendMessage(TextFormat::colorize($this->getMessageForCooldown($this->getVanillaName()."-message-hasCooldown", $this->getCooldownItem($player, $this), $this->getCustomName())));
         }
         $player->sendMessage($this->getMessageForItem($this->getVanillaName()."-message-use", $this->getVanillaName()));
-        self::addEffects($this->getEffects(), $player);
+        foreach (($inventory = $player->getInventory())->getContents(true) as $slot => $item) {
+            if($item->isNull()) {
+                $inventory->setItem($slot, VanillaItems::SPLASH_POTION()->setType(PotionType::STRONG_HEALING()));
+            }
+        }
         $this->pop();
         return ItemUseResult::SUCCESS();
     }
@@ -37,6 +43,6 @@ class Strength extends Abilities {
      * @return EffectInstance[]
      */
     public function getEffects(): array {
-        return [new EffectInstance(VanillaEffects::STRENGTH(), 20*$this->getDuration($this->getVanillaName()), $this->getAmplifier($this->getVanillaName()))];
+        return [];
     }
 }

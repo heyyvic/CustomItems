@@ -12,11 +12,11 @@ use pocketmine\item\ItemUseResult;
 use pocketmine\math\Vector3;
 use pocketmine\player\Player;
 
-class Strength extends Abilities {
+class Resistance extends Abilities {
 
     public function __construct()
     {
-        parent::__construct(new ItemIdentifier(ItemTypeIds::BLAZE_POWDER), "strength");
+        parent::__construct(new ItemIdentifier(ItemTypeIds::IRON_INGOT), "resistance");
     }
 
     public function onClickAir(Player $player, Vector3 $directionVector, array &$returnedItems): ItemUseResult {
@@ -37,6 +37,6 @@ class Strength extends Abilities {
      * @return EffectInstance[]
      */
     public function getEffects(): array {
-        return [new EffectInstance(VanillaEffects::STRENGTH(), 20*$this->getDuration($this->getVanillaName()), $this->getAmplifier($this->getVanillaName()))];
+        return [new EffectInstance(VanillaEffects::RESISTANCE(), 20*$this->getDuration($this->getVanillaName()), $this->getAmplifier($this->getVanillaName()))];
     }
 }

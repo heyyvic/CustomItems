@@ -14,4 +14,4 @@ strength-message-use: "&eYou just used {displayName}&r&e for &f{duration}'s&e."
 
 global-message-hasCooldown: "&cYou can't use this because you have {format}&r&c cooldown. This ends in &7{time}&r&c."
 
-pitem-message-hasCooldown: "&cYou can't use this because you have {format}&r&c cooldown. This ends in &7{time}&r&c."
+strength-message-hasCooldown: "&cYou can't use this because you have {format}&r&c cooldown. This ends in &7{time}&r&c."

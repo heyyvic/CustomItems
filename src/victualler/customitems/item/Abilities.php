@@ -2,20 +2,20 @@
 
 namespace victualler\customitems\item;
 
-use pocketmine\item\enchantment\EnchantmentInstance;
-use pocketmine\item\enchantment\VanillaEnchantments;
+use victualler\customitems\item\trait\CooldownTrait;
+use victualler\customitems\item\trait\MessageTrait;
+use victualler\customitems\Loader;
 use pocketmine\item\Item;
 use pocketmine\item\ItemIdentifier;
 use pocketmine\player\Player;
 use pocketmine\utils\SingletonTrait;
 use pocketmine\utils\TextFormat;
-use victualler\customitems\Loader;
-use victualler\customitems\item\trait\MessageTrait;
 
 abstract class Abilities extends Item {
 
     use SingletonTrait;
     use MessageTrait;
+    use CooldownTrait;
 
     /**
      * @param ItemIdentifier $identifier
@@ -51,10 +51,6 @@ abstract class Abilities extends Item {
 
     public function getCooldown(String $name): int {
         return intval(Loader::getInstance()->getConfig()->get($name)['cooldown']);
-    }
-
-    public function getFormat(String $name): string {
-        return Loader::getInstance()->getConfig()->get($name)['format'];
     }
 
     public function getCooldownGlobal(): int {

@@ -2,8 +2,8 @@
 
 namespace victualler\customitems\item\trait;
 
+use victualler\customitems\api\cooldowns\Cooldowns;
 use pocketmine\utils\Config;
-use victualler\customitems\session\cooldown\Cooldown;
 
 trait MessageTrait {
 
@@ -12,8 +12,8 @@ trait MessageTrait {
         return str_replace(['{displayName}', '{displayLore}', '{cooldown}', '{amplifier}', '{duration}'], [$this->getDisplayName($name), $this->getDisplayLore($name), $this->getCooldown($name), $this->getAmplifier($name), $this->getDuration($name)], $config->get($string));
     }
 
-    public function getMessageForCooldown(String $string, Cooldown $cooldown): String {
+    public function getMessageForCooldown(String $string, String $time, String $format): String {
         $config = new Config("messages.yml", Config::YAML);
-        return str_replace(['{format}', '{time}'], [$cooldown->getFormat(), $cooldown->getTime()], $config->get($string));
+        return str_replace(['{time}', '{format}'], [$time, $format], $config->get($string));
     }
 }
