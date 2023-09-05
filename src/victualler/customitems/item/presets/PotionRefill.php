@@ -35,6 +35,8 @@ class PotionRefill extends Abilities {
                 $inventory->setItem($slot, VanillaItems::SPLASH_POTION()->setType(PotionType::STRONG_HEALING()));
             }
         }
+        $this->addCooldownGlobalItem($player, $this);
+        $this->addCooldownItem($player, $this);
         $this->pop();
         return ItemUseResult::SUCCESS();
     }

@@ -29,6 +29,8 @@ class Resistance extends Abilities {
         }
         $player->sendMessage($this->getMessageForItem($this->getVanillaName()."-message-use", $this->getVanillaName()));
         self::addEffects($this->getEffects(), $player);
+        $this->addCooldownGlobalItem($player, $this);
+        $this->addCooldownItem($player, $this);
         $this->pop();
         return ItemUseResult::SUCCESS();
     }
